@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head style="z-index: 1">
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- https://favicon.io/emoji-favicons/money-mouth-face/ -->
+        <link href="/static/favicon.ico" rel="icon">
+
+        <link href="/static/styles.css" rel="stylesheet">
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+        </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawPie);
+
+      function drawPie() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Group', 'Hours per Day'],
+          ['Calories',  {{ totcals }}],
+          ['Remaining Calories',  {{ remaining }}],
+        ]);
+
+        var options = {
+          title: 'Daily Calories',
+          slices: {
+            0: { color: 'navy' },
+            1: { color: 'lightgray' }
+          }
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Category', 'Today', 'Daily Goal'],
+        ['Carbs', {{ totcarbs }}, {{ goalcarbs }}],
+        ['Protein', {{ totprotein }}, {{ goalprotein }}],
+        ['Fats', {{ totfats }}, {{ goalfats }}]
+      ]);
+
+      var options = {
+        chart: {
+          title: 'Your Daily Nutrition',
+        },
+          colors: ['navy', 'lightgray'],
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+    </script>
+        <title>YALEFITNESS: {% block title %}{% endblock %}</title>
+
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+          <a class="navbar-brand" href="/">YALEFITNESS</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarColor02">
+           {% if session.user_id %}
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/goals">Set Goals</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/daily">Food Tracker</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/excercise">Daily Excercise</a>
+              </li>            </ul>
+              <ul class="navbar-nav ml-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+            </ul>
+            {% else %}
+              <ul class="navbar-nav ml-auto mt-2">
+                  <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+              </ul>
+            {% endif %}
+          </div>
+        </nav>
+        <main class="container p-5">
+            {% block main %}{% endblock %}
+        </main>
+
+    </body>
+
+</html>

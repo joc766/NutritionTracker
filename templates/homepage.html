@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Welcome
+{% endblock %}
+
+{% block main %}
+<header><h1>Welcome!</h1></header>
+{% if remaining < 0 %}
+<div style="color: red">
+    YOU HAVE EXCEEDED YOUR RECOMMENDED CALORIC INTAKE BY {{ excess }} CALORIES
+</div>
+{% elif goalcals == 0 %}
+<div class="centered" style="top: 40%">
+<b>You can set your goals on the <a href="/goals">Set Goals</a> page!</b>
+</div>
+{% else %}
+    <div id="columnchart_material" style="width: 500px; height: 400px;display: inline-block; float: left"></div>
+    <div id="piechart" style="width: 500px; height: 350px;display: inline-block;float: right"></div>
+{% endif %}
+<div>
+{% if length > 2 %}
+<h4>Quick Add Favorite Foods!</h4>
+<form action="/" method="post">
+    <select id="food" name="food">
+            <option value="0">{{ favorites[0]["name"] }}</option>
+            <option value="1">{{ favorites[1]["name"] }}</option>
+            <option value="2">{{ favorites[2]["name"] }}</option>
+    </select>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+{% endif %}
+</div>
+{% endblock %}

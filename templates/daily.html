@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}
+    Daily Nutrition
+{% endblock %}
+
+{% block main %}
+    <div class="centered" style="top: 36%">
+        <div class="form-group">
+            <form action="/daily" method="post">
+            <h2>Add Food</h2>
+            <!--if you have time, consider adding something that keeps track of when you use the same food. reference videos on CS50.yale.edu-->
+            <div>
+            <input autocomplete="off" autofocus class="form-control" name="name" placeholder="Name" type="text" required>
+            </div>
+            <div>
+            <input autocomplete="off" autofocus class="form-control" name="calories" placeholder="Calories" type="text" required>
+            </div>
+            <div>
+            <input autocomplete="off" autofocus class="form-control" name="carbs" placeholder="Carbohydrates" type="text" required>
+            </div>
+            <div>
+            <input autocomplete="off" autofocus class="form-control" name="protein" placeholder="Protein" type="text" required>
+            </div>
+            <div>
+            <input autocomplete="off" autofocus class="form-control" name="fats" placeholder="Fats" type="text" required>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
+        <!--allow user to enter their goals here with a form-->
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block title %}
+    Goals
+{% endblock %}
+
+{% block main %}
+    <div class="centered" style="top: 35%">
+        <div>
+        <h2>Set Goals</h2>
+        <div>
+        <form action="/goals" method="post">
+            <input autocomplete="off" autofocus class="form-control" required="required" name="sex" placeholder="Sex (Male or Female)" type="text">
+            <input autocomplete="off" autofocus class="form-control" required="required" name="age" placeholder="Age" type="number">
+            <input autocomplete="off" autofocus class="form-control" required="required" name="height" placeholder="Height (in)" type="number">
+            <input autocomplete="off" autofocus class="form-control" required="required" name="weight" placeholder="Weight (lbs)" type="number">
+            <input autocomplete="off" autofocus class="form-control" required="required" name="goalweight" placeholder="Goal Weight (lbs)" type="number">
+            </div>
+            <form action="/goals" method="post">
+            <div>
+            <select name="activity">
+                <h3>Daily Activity Level:</h3>
+                <option value="select" selected>Select</option>
+                <option value="sedentary">Sedentary</option>
+                <option value="lightly">Lightly Active</option>
+                <option value="moderately">Moderately Active</option>
+                <option value="very">Very Active</option>
+                <option value="extra">Extra Active</option>
+            </select>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
+        <!--allow the user to set/reset their goals with a form-->
+    </form>
+    <div class="Guidelines">
+        <h2>Daily Nutritional Guidelines</h2>
+        <p class="goals"><b>Calories:</b> {{ calories }} grams</p>
+        <p class="goals"><b>Carbs:</b> {{ carbs }} grams</p>
+        <p class="goals"><b>Protein:</b> {{ protein }} grams</p>
+        <p class="goals"><b>Fats:</b> {{ fats }} grams</p>
+    </div>
+
+
+
+{% endblock%}
